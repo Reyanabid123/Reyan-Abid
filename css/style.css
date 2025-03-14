@@ -1,0 +1,466 @@
+/* Basic CSS Reset and Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Poppins, sans-serif;
+    font-size: 18px;
+    background-color: #f8f9fa;
+    color: #000000;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar h2 {
+    font-size: 42.05px;
+    letter-spacing: -1%;
+    line-height: 80%;
+    font-weight: 400;
+}
+
+.navbar ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    gap: 20px;
+    font-size: 26.24px;
+}
+
+.navbar ul li {
+    line-height: 80%;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.navbar ul button {
+    line-height: 80%;
+    font-weight: 400;
+    cursor: pointer;
+    font-size: 26.24px;
+    padding: 10px 20px;
+    background: #000;
+    color: #fff;
+    border: none;
+}
+
+.hero-sec {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-weight: 400;
+    margin-top: 50px;
+    justify-content: center;
+    height: 90vh;
+}
+
+.holder {
+    height: 40%;
+    text-align: left;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    gap: 50px;
+    flex-direction: column;
+}
+
+.hero-sec h2 {
+    font-size: 32.53px;
+    letter-spacing: -3%;
+    line-height: 111%;
+    font-weight: 400;
+}
+
+.hero-sec button {
+    line-height: 80%;
+    font-weight: 400;
+    cursor: pointer;
+    font-size: 24.25px;
+    padding: 10px 20px;
+    background: #000;
+    color: #fff;
+    border: none;
+}
+
+.webinaction button {
+    line-height: 80%;
+    font-weight: 400;
+    cursor: pointer;
+    font-size: 22.78px;
+    padding: 10px 20px;
+    background: #000;
+    color: #fff;
+    border: none;
+    margin: 40px 0px;
+}
+
+.container-inner {
+    gap: 20px;
+    height: 120vh;
+    width: 100%;
+}
+
+.left-box {
+    height: 80%;
+    width: 50%;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.left-box h2 {
+    font-size: 26px;
+    letter-spacing: -3%;
+    line-height: 111%;
+    font-weight: 400;
+}
+
+.another-message {
+    width: 100%;
+    height: 50vh;
+    align-items: flex-start;
+    position: relative;
+}
+
+.another-message h2 {
+    font-size: 26px;
+    width: 50%;
+    position: absolute;
+    top: 80%;
+    left: 75%;
+    transform: translate(-50%, -50%);
+    float: right;
+    letter-spacing: -3%;
+    line-height: 111%;
+    font-weight: 400;
+}
+
+.thewhitespace {
+    height: 40vh;
+    width: 100%;
+}
+
+.myworksection {
+    gap: 20px;
+    font-weight: 400;
+    flex-direction: column;
+    height: auto;
+}
+
+.myworksection button {
+    line-height: 111%;
+    font-weight: 400;
+    cursor: pointer;
+    font-size: 30.87px;
+    padding: 10px 20px;
+    background: #000;
+    color: #fff;
+    border: none;
+    letter-spacing: -3%;
+}
+
+.ProjectImageHolder {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    margin: 100px 0px;
+}
+
+.BigImage {
+    height: 50vh;
+    width: 60%;
+    /* border: 2px solid #000; */
+    overflow: hidden;
+}
+
+.BigImage img {
+    width: 100%;
+    /* border: 2px solid #000; */
+    /* background-position: f; */
+}
+
+.SmallImages {
+    margin: 100px 0px;
+    height: 0vh;
+    width: 100%;
+    /* border: 2px solid #000; */
+    justify-content: space-evenly;
+    align-items: center;
+    display: flex;
+}
+
+.SmallImages img {
+    margin: 100px 0px;
+    height: 50vh;
+    width: 40%;
+    /* border: 2px solid #000; */
+    justify-content: space-evenly;
+    align-items: center;
+    display: flex;
+}
+
+.ReviewsSection {
+    gap: 20px;
+    font-weight: 400;
+    flex-direction: column;
+    height: 50vh;
+    /* border: 2px solid #000; */
+
+    padding: 50px 0px;
+}
+
+.ReviewsSection button {
+    line-height: 80%;
+    font-weight: 400;
+    cursor: pointer;
+    font-size: 26.24px;
+    padding: 10px 20px;
+    background: #000;
+    color: #fff;
+    border: none;
+}
+
+.ReviewTextSection {
+    justify-content: space-evenly;
+    align-items: center;
+    display: flex;
+    height: 60%;
+    /* flex-direction: column; */
+    /* border: #000 2px solid; */
+
+}
+
+.TheRewiw1 {
+    height: 50%;
+    width: 50%;
+    /* border: #000 2px solid; */
+}
+
+.TheRewiw2 {
+    height: 50%;
+    width: 50%;
+    /* border: #000 2px solid; */
+
+}
+
+.TheRewiw1 h2 {
+    font-size: 26px;
+    letter-spacing: -3%;
+    line-height: 111%;
+    font-weight: 400;
+}
+
+.TheRewiw1 span {
+    font-size: 20px;
+    letter-spacing: -7%;
+    line-height: 111%;
+    font-weight: 400;
+}
+
+.TheRewiw2 h2 {
+    font-size: 26px;
+    letter-spacing: -3%;
+    line-height: 111%;
+    font-weight: 400;
+}
+
+.TheRewiw2 span {
+    font-size: 20px;
+    letter-spacing: -7%;
+    line-height: 111%;
+    font-weight: 400;
+}
+
+.AboutMEsec {
+    height: 160vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    flex-direction: column;
+    /* border: #000 2px solid; */
+}
+
+.AboutMEsec button {
+    line-height: 80%;
+    font-weight: 400;
+    cursor: pointer;
+    font-size: 26.24px;
+    padding: 10px 20px;
+    background: #000;
+    color: #fff;
+    border: none;
+}
+
+.TextSection {
+    height: 20%;
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    /* border: #000 2px solid; */
+}
+
+.ConatcinerHholder {
+    height: 90%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    flex-direction: column;
+    /* border: #000 2px solid; */
+}
+
+.TextSection span {
+    font-size: 30px;
+    letter-spacing: -7%;
+    line-height: 111%;
+    font-weight: 400;
+}
+
+.HowiWork {
+    height: 140vh;
+    width: 100%;
+    justify-content: space-evenly;
+    align-items: start;
+    display: flex;
+    flex-direction: column;
+    /* border: #000 2px solid; */
+}
+
+.HowiWork button {
+    line-height: 80%;
+    font-weight: 400;
+    cursor: pointer;
+    font-size: 26.24px;
+    padding: 10px 20px;
+    background: #000;
+    color: #fff;
+    border: none;
+}
+
+.R1ow {
+    height: 50%;
+    /* border: 1px solid black; */
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    /* flex-direction: ; */
+    width: 70%
+}
+
+
+.card {
+    width: 45%;
+    height: 80%;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    font-family: Poppins, sans-serif;
+}
+
+.number {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 46.3px;
+
+    font-weight: 400;
+}
+
+.content {
+    text-align: center;
+}
+
+.wireframe,
+.design {
+    font-size: 46.3px;
+    font-weight: 400;
+}
+.th{
+    font-size: 34.3px;
+    font-weight: 400;
+}
+.arrow {
+    font-size: 46.3px;
+    font-weight: 400;
+}
+
+.R2ow {
+    height: 50%;
+    /* border: 1px solid black; */
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    /* flex-direction: ; */
+    width: 70%
+}
+.Contact{
+    height: 90vh;
+    width: 100%;
+    display: flex;
+  justify-content: space-between;
+    align-items: start;
+    flex-direction: column;
+
+    /* border: #000 2px solid; */
+}
+.Contact button {
+    line-height: 80%;
+    font-weight: 400;
+    cursor: pointer;
+    font-size: 26.24px;
+    padding: 10px 20px;
+    background: #000;
+    color: #fff;
+    border: none;
+}
+.sociaLinks{
+    height: 100%;
+    width: 50%;
+    gap: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    /* border: #000 2px solid; */
+}
+.thisHolder{
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    /* border: #000 2px solid; */
+flex-direction: column;
+    /* border: #000 2px solid; */
+}
+.thisHolder a{
+    font-size: 88.69px;
+    letter-spacing: -3%;
+    line-height: 111%;
+    font-weight: 400;
+    text-decoration: none;
+    color: #000;
+}
