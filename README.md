@@ -15,9 +15,9 @@ It showcases my expertise in **UI/UX design, web development, branding, and grow
 - **Webflow Exploration** (for future scalability)  
 
 ## 📂 Live Preview:  
-[GitHub Pages Link](#) _(Just Wait until I make here and launch here)_  
+[[GitHub Pages Link](https://reyanabid123.github.io/Reyan-Abid/)](#) _(Click and see my profilo)_  
 
 ## 🛠️ How to Use:  
 1. Clone the repository:  
    ```bash
-   git clone https://github.com/yourusername/portfolio.git
+   git clone https://github.com/Reyanabid123/Reyan-Abid.git
