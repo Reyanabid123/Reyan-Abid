@@ -186,9 +186,38 @@
     <div class="Contact">
       <button>Contact</button>
       <div class="thisHolder">
-        <a href="mailto:reyan.webdev@gmail.com?subject=hello%20word"
-          >reyan.webdev@gmail.com</a
-        >
+        <div id="emailContainer">
+          <a href="#" id="emailCopy" onclick="handleEmailClick(); return false;">reyan.webdev@gmail.com</a>
+          <div id="copyNotification" style="position: fixed; padding: 8px 12px; background: #333; color: #fff; border-radius: 4px; opacity: 0; transition: opacity 0.3s; font-size: 14px; z-index: 1000;">Email Copied</div>
+        </div>
+
+        <script>
+          let emailClickedOnce = false;
+
+          function handleEmailClick() {
+            if (!emailClickedOnce) {
+              copyEmail();
+              emailClickedOnce = true;
+            } else {
+              window.open('mailto:reyan.webdev@gmail.com?subject=Hi%20reyan');
+            }
+          }
+
+          function copyEmail() {
+            const email = 'reyan.webdev@gmail.com';
+            navigator.clipboard.writeText(email).then(() => {
+              const notification = document.getElementById('copyNotification');
+              // Position the notification at bottom center of the screen
+              notification.style.left = '50%';
+              notification.style.bottom = '20px';
+              notification.style.transform = 'translateX(-50%)';
+              notification.style.opacity = 1;
+              setTimeout(() => {
+                notification.style.opacity = 0;
+              }, 2000);
+            });
+          }
+        </script>
         <div class="social-links"></div>
       </div>
     </div>
