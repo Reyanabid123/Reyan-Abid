@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Primary Meta Tags -->
-    <meta name="description" content="Reyan Abid Profilo - Website Developer & Designer. Discover innovative design, responsive websites, and digital strategies that drive exponential growth." />
+    <meta
+      name="description"
+      content="Reyan Abid Profilo - Website Developer & Designer. Discover innovative design, responsive websites, and digital strategies that drive exponential growth."
+    />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://reyanabid123.github.io/Reyan-Abid/" />
     <title>Reyan Abid Profilo</title>
@@ -13,26 +16,41 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Reyan Abid Profilo" />
-    <meta property="og:description" content="Reyan Abid Profilo - Website Developer & Designer. Discover innovative design, responsive websites, and digital strategies that drive exponential growth." />
-    <meta property="og:url" content="https://reyanabid123.github.io/Reyan-Abid/" />
-    <meta property="og:image" content="https://reyanabid123.github.io/Reyan-Abid/Assets/profilo-imag-min.png" />
+    <meta
+      property="og:description"
+      content="Reyan Abid Profilo - Website Developer & Designer. Discover innovative design, responsive websites, and digital strategies that drive exponential growth."
+    />
+    <meta
+      property="og:url"
+      content="https://reyanabid123.github.io/Reyan-Abid/"
+    />
+    <meta
+      property="og:image"
+      content="https://reyanabid123.github.io/Reyan-Abid/Assets/profilo-imag-min.png"
+    />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Reyan Abid Profilo" />
-    <meta name="twitter:description" content="Reyan Abid Profilo - Website Developer & Designer. Discover innovative design, responsive websites, and digital strategies that drive exponential growth." />
-    <meta name="twitter:image" content="https://reyanabid123.github.io/Reyan-Abid/Assets/profilo-imag-min.png" />
+    <meta
+      name="twitter:description"
+      content="Reyan Abid Profilo - Website Developer & Designer. Discover innovative design, responsive websites, and digital strategies that drive exponential growth."
+    />
+    <meta
+      name="twitter:image"
+      content="https://reyanabid123.github.io/Reyan-Abid/Assets/profilo-imag-min.png"
+    />
 
     <!-- Structured Data -->
     <script type="application/ld+json">
       {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Reyan Abid",
-      "jobTitle": "Website Developer & Designer",
-      "url": "https://reyanabid123.github.io/Reyan-Abid/",
-      "image": "https://reyanabid123.github.io/Reyan-Abid/Assets/profilo-imag-min.png",
-      "description": "Discover innovative design, responsive websites, and digital strategies that drive exponential growth."
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Reyan Abid",
+        "jobTitle": "Website Developer & Designer",
+        "url": "https://reyanabid123.github.io/Reyan-Abid/",
+        "image": "https://reyanabid123.github.io/Reyan-Abid/Assets/profilo-imag-min.png",
+        "description": "Discover innovative design, responsive websites, and digital strategies that drive exponential growth."
       }
     </script>
     <link
@@ -74,7 +92,7 @@
             loyalty and online orders through their website.<br />
             In 2023, Starbucks made over $32 billion in revenue. Imagine if your
             coffee shop had just 1% of that success.
-          </h2>
+          </h2> 
           <h2>
             Over 80% of customers check a restaurant’s website before deciding
             where to dine. If they can’t find yours, they’ll choose someone
@@ -96,10 +114,18 @@
       <button>My work</button>
       <div class="ProjectImageHolder">
         <div class="BigImage">
-          <img src="Assets/image-25-min.jpg" alt="Project image" loading="lazy" />
+          <img
+            src="Assets/image-25-min.jpg"
+            alt="Project image"
+            loading="lazy"
+          />
         </div>
         <div class="SmallImages">
-          <img src="Assets/Example2-min.jpg" alt="Example work" loading="lazy" />
+          <img
+            src="Assets/Example2-min.jpg"
+            alt="Example work"
+            loading="lazy"
+          />
           <img src="Assets/2-min.jpg" alt="Example work" loading="lazy" />
         </div>
       </div>
@@ -138,7 +164,11 @@
           techniques. Contact me today.
         </span>
       </div>
-      <img src="Assets/profilo-image-big-min.jpg" alt="Profilo image" loading="lazy" />
+      <img
+        src="Assets/profilo-image-big-min.jpg"
+        alt="Profilo image"
+        loading="lazy"
+      />
     </div>
     <div class="thewhitespace"></div>
 
@@ -186,38 +216,35 @@
     <div class="Contact">
       <button>Contact</button>
       <div class="thisHolder">
+        
         <div id="emailContainer">
-          <a href="#" id="emailCopy" onclick="handleEmailClick(); return false;">reyan.webdev@gmail.com</a>
-          <div id="copyNotification" style="position: fixed; padding: 8px 12px; background: #333; color: #fff; border-radius: 4px; opacity: 0; transition: opacity 0.3s; font-size: 14px; z-index: 1000;">Email Copied</div>
+          <a href="mailto:reyan.webdev@gmail.com" id="emailCopy" title="Email Reyan Webdev">
+            reyan.webdev@gmail.com
+          </a>
+          <div id="copyNotification" style="opacity: 0; transition: opacity 0.3s ease-in-out; will-change: opacity;">
+            Email Copied
+          </div>
         </div>
-
-        <script>
-          let emailClickedOnce = false;
-
-          function handleEmailClick() {
-            if (!emailClickedOnce) {
-              copyEmail();
-              emailClickedOnce = true;
-            } else {
-              window.open('mailto:reyan.webdev@gmail.com?subject=Hi%20reyan');
-            }
-          }
-
-          function copyEmail() {
-            const email = 'reyan.webdev@gmail.com';
-            navigator.clipboard.writeText(email).then(() => {
-              const notification = document.getElementById('copyNotification');
-              // Position the notification at bottom center of the screen
-              notification.style.left = '50%';
-              notification.style.bottom = '20px';
-              notification.style.transform = 'translateX(-50%)';
-              notification.style.opacity = 1;
-              setTimeout(() => {
-                notification.style.opacity = 0;
-              }, 2000);
-            });
-          }
-        </script>
+        <div class="thefinal">
+  <button style="font-size: 2.2rem;">Lets book a call</button>
+  <div class="thesiciaLinks">
+   
+    <a href="https://www.instagram.com/reyancreates/" target="_blank" rel="noopener noreferrer"
+      style="background: #000; color: #fff; display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; margin-right: 8px;">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+       <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5zm10.5 2a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm-5.25 1.5a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11zm0 1.5a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/>
+      </svg>
+    </a>
+    <a href="https://www.facebook.com/reyan.webdev" target="_blank" rel="noopener noreferrer"
+      style="background: #000; color: #fff; display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px;">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+       <path d="M22 12a10 10 0 1 0-11.5 9.87v-6.99h-2.2v-2.88h2.2V9.41c0-2.18 1.3-3.39 3.3-3.39.95 0 1.96.17 1.96.17v2.15h-1.1c-1.08 0-1.42.67-1.42 1.36v1.64h2.42l-.39 2.88h-2.03v6.99A10.01 10.01 0 0 0 22 12z"/>
+      </svg>
+    </a>
+   
+  </div>
+</div>
+        <script></script>
         <div class="social-links"></div>
       </div>
     </div>

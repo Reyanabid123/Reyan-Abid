@@ -190,11 +190,10 @@ body {
     /* border: 2px solid #000; */
     overflow: hidden;
 }
-
 .BigImage img {
+    display: block;
     width: 100%;
-    /* border: 2px solid #000; */
-    /* background-position: f; */
+    height: auto;
 }
 
 .SmallImages {
@@ -463,4 +462,12 @@ flex-direction: column;
     font-weight: 400;
     text-decoration: none;
     color: #000;
+}
+.thefinal{
+    height: 70vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
 }
