@@ -134,6 +134,16 @@ body {
     }
 }
 
+.webinaction {
+    height: 170vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    /* padding: 100px ; */
+    /* border: #000 2px solid; */
+}
 /* responsive done !! */
 .webinaction button {
     line-height: 80%;
@@ -144,7 +154,7 @@ body {
     background: #000;
     color: #fff;
     border: none;
-    margin: 40px 0px;
+    margin: 100px 0px;
 }
 
 .container-inner {
@@ -171,44 +181,31 @@ body {
     margin-bottom: 10px;
     /* Gap after each paragraph */
 }
-
 .another-message {
     width: 100%;
     height: 50vh;
-
     /* border: #000 2px solid; */
+    display: flex;
     justify-content: center;
     align-items: center;
-    display: flex;
 }
 
 .another-message h2 {
     font-size: 20px;
-    /* Mobile: small text */
-    width: 90%;
-    position: absolute;
-    /* border: #000 2px solid; */
-
     letter-spacing: -3%;
     line-height: 111%;
     font-weight: 400;
     margin-bottom: 10px;
-    /* Gap after the text */
 }
 
 /* Desktop overrides */
 @media (min-width: 1024px) {
     .left-box h2 {
         font-size: 32px;
-        /* Desktop: larger text */
     }
 
     .another-message h2 {
         font-size: 32px;
-        letter-spacing: -3%;
-        line-height: 111%;
-        font-weight: 400;
-        /* Desktop: larger text */
     }
 }
 
