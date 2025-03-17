@@ -580,7 +580,7 @@ body {
 }
 
 .thisHolder {
-    height: auto;
+    height: 23vh;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -590,7 +590,7 @@ body {
 }
 
 .thisHolder a {
-    font-size: 2rem;
+    font-size: 7rem;
     letter-spacing: -1px;
     line-height: 1.1;
     font-weight: 400;
@@ -668,7 +668,7 @@ body {
     }
 
     .thisHolder a {
-        font-size: 1.5rem;
+        font-size: 2.2rem;
         text-align: center;
     }
 
@@ -677,18 +677,20 @@ body {
     }
 
     .thefinal button {
-        font-size: 0.2rem;
+        font-size: 1px;
         padding: 8px 16px;
-        width: 60%;
+        width: 100%;
+
     }
 
     .emailContainer {
         width: 100%;
+        border: #000 2px solid;
     }
 
-    .emailContainer span {
+    .emailContainer a>span {
         width: 100%;
-        font-size: 14px;
+        font-size: 204px;
         /* Small on mobile */
         display: block;
         width: 100%;
@@ -707,7 +709,7 @@ body {
 
     .thesiciaLinks {
         justify-content: space-evenly;
-        width: 80%;
+        width: 50%;
     }
 
     .WhatsappNUmber {
@@ -716,5 +718,7 @@ body {
 
     .WhatsappNUmber span {
         font-size: 2rem;
+        /* Big on desktop */
+        text-decoration: none;
     }
 }
