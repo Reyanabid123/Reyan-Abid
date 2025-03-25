@@ -1,183 +1,206 @@
-// filepath: e:/Profilo/js/script.js
-
-// Wait for DOM to be ready.
 document.addEventListener('DOMContentLoaded', () => {
-    // Scroll handling: prioritize URL hash then localStorage.
-    const scrollPosition = window.location.hash
-        ? parseInt(window.location.hash.substring(1), 10)
-        : parseInt(localStorage.getItem('savedScroll'), 10);
-    if (!isNaN(scrollPosition)) window.scrollTo(0, scrollPosition);
-});
+    // Scroll Position Save/Restore with error handling.
+    try {
+        const hash = window.location.hash;
+        let scrollPosition = hash ? parseInt(hash.substring(1), 10) : parseInt(localStorage.getItem('savedScroll'), 10);
+        if (!isNaN(scrollPosition)) window.scrollTo(0, scrollPosition);
+    } catch (e) {
+        console.error('Scroll restore error:', e);
+    }
 
-// Save scroll position using debounced updates.
-let scrollTimer;
-window.addEventListener('scroll', () => {
-    if (scrollTimer) clearTimeout(scrollTimer);
-    scrollTimer = setTimeout(() => {
-        const scrollY = window.scrollY;
-        history.replaceState(null, null, '#' + scrollY);
-        localStorage.setItem('savedScroll', scrollY);
-    }, 150);
-});
-
-(() => {
-    // Create mouse follower with basic styling; using black as background.
-    const follower = document.createElement('div');
-    Object.assign(follower.style, {
-        position: 'fixed',
-        top: '0px',
-        left: '0px',
-        width: '10px',
-        height: '10px',
-        borderRadius: '50%',
-        border: '2px solid black',
-        background: 'black',
-        pointerEvents: 'none',
-        zIndex: 9999,
-        transition: 'width 0.2s, height 0.2s',
-        willChange: 'transform, width, height, background'
-    });
-    document.body.appendChild(follower);
-
-    // Create a container for trail elements.
-    const trailContainer = document.createElement('div');
-    Object.assign(trailContainer.style, {
-        position: 'fixed',
-        top: '0',
-        left: '0',
-        width: '100%',
-        height: '100%',
-        pointerEvents: 'none',
-        zIndex: 9998,
-    });
-    document.body.appendChild(trailContainer);
-
-    const baseSize = 10;
-    const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-    const sizeFactor = isMobile ? 0.7 : 1;
-
-    let targetX = window.innerWidth / 2, targetY = window.innerHeight / 2;
-    let currentX = targetX, currentY = targetY;
-    let lastX = targetX, lastY = targetY;
-
-    // Update target on mousemove (with a slight blur change based on element under pointer)
-    document.addEventListener('mousemove', (e) => {
-        targetX = e.clientX;
-        targetY = e.clientY;
-        const el = document.elementFromPoint(e.clientX, e.clientY);
-        follower.style.filter = (el && el !== follower && el !== document.documentElement && el !== document.body)
-            ? 'blur(4px)' : 'blur(2px)';
+    let scrollTimer;
+    window.addEventListener('scroll', () => {
+        if (scrollTimer) clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => {
+            const scrollY = window.scrollY;
+            history.replaceState(null, null, '#' + scrollY);
+            localStorage.setItem('savedScroll', scrollY);
+        }, 150);
     });
 
-    // Animation loop using requestAnimationFrame.
-    let lastTrailTime = 0;
-    const animate = (time) => {
-        // Calculate speed for dynamic effects.
-        const dx = targetX - lastX;
-        const dy = targetY - lastY;
-        const speed = Math.hypot(dx, dy);
-        // Increase size with speed if needed.
-        const newSize = baseSize * sizeFactor + Math.min(speed, 50) / 5;
+    // Register GSAP plugins.
+    if (typeof gsap === 'undefined' || !gsap.registerPlugin) {
+        console.error('GSAP is not available.');
+        return;
+    }
+    if (window.ScrollTrigger && window.ScrollToPlugin) {
+        gsap.registerPlugin(window.ScrollTrigger, window.ScrollToPlugin);
+    }
 
-        // Optional: adjust color intensity based on speed if desired
-        // Here we keep follower background black.
-        follower.style.width = newSize + 'px';
-        follower.style.height = newSize + 'px';
-
-        // Create a trail dot every 30ms (to avoid flooding)
-        if (time - lastTrailTime > 30) {
-            const trail = document.createElement('div');
-            Object.assign(trail.style, {
-                position: 'fixed',
-                left: (currentX - newSize / 2) + 'px',
-                top: (currentY - newSize / 2) + 'px',
-                width: newSize + 'px',
-                height: newSize + 'px',
-                borderRadius: '50%',
-                background: 'black',
-                opacity: '0.5',
-                pointerEvents: 'none'
-            });
-            trailContainer.appendChild(trail);
-            // Fade out and remove trail.
-            requestAnimationFrame(() => {
-                trail.style.transition = 'opacity 1s';
-                trail.style.opacity = '0';
-                trail.addEventListener('transitionend', () => trail.remove());
-            });
-            lastTrailTime = time;
-        }
-
-        // Smooth interpolation.
-        currentX += (targetX - currentX) * 0.2;
-        currentY += (targetY - currentY) * 0.2;
-        follower.style.transform = `translate(${currentX - newSize / 2}px, ${currentY - newSize / 2}px)`;
-
-        lastX = currentX;
-        lastY = currentY;
-        requestAnimationFrame(animate);
-    };
-    requestAnimationFrame(animate);
-
-    // Drop ball effect on click.
-    function spawnDropBall(x, y) {
-        const ball = document.createElement('div');
-        Object.assign(ball.style, {
+    // Setup a simple GSAP-powered cursor follower for non-touch devices.
+    if (!('ontouchstart' in window)) {
+        const follower = document.createElement('div');
+        follower.id = 'gsap-follower';
+        Object.assign(follower.style, {
             position: 'fixed',
-            left: (x - 10) + 'px',
-            top: (y - 10) + 'px',
+            top: '0',
+            left: '0',
             width: '20px',
             height: '20px',
             borderRadius: '50%',
-            background: '#000',
+            background: 'rgba(0,0,0,0.7)',
             pointerEvents: 'none',
-            zIndex: 9998,
-            transition: 'transform 1s ease-in, opacity 1s'
+            zIndex: '9999',
+            transformOrigin: 'center center',
+            opacity: '1'  // visible initially
         });
-        document.body.appendChild(ball);
-        // Trigger after a short delay.
-        setTimeout(() => {
-            const endY = window.innerHeight - ball.offsetHeight - 5;
-            ball.style.transform = `translateY(${endY - y}px)`;
-            ball.style.opacity = '0';
-        }, 1000);
-        ball.addEventListener('transitionend', () => ball.remove());
+        document.body.appendChild(follower);
+    
+        let lastX = 0, lastY = 0, lastTime = performance.now(), mouseStopTimer;
+    
+        document.addEventListener('mousemove', (e) => {
+            const now = performance.now();
+            const dt = now - lastTime || 16;
+            const dx = e.clientX - lastX;
+            const dy = e.clientY - lastY;
+            const vx = dx / dt;
+            const vy = dy / dt;
+            const factorVal = 25;
+    
+            const skewX = Math.max(Math.min(vx * factorVal, 25), -25);
+            const skewY = Math.max(Math.min(vy * factorVal, 25), -25);
+    
+            gsap.to(follower, {
+                duration: 0.3,
+                x: e.clientX - 15,
+                y: e.clientY - 15,
+                skewX: skewX,
+                skewY: skewY,
+                ease: "power2.out",
+                opacity: 1  // ensure it’s visible when moving
+            });
+    
+            lastX = e.clientX;
+            lastY = e.clientY;
+            lastTime = now;
+    
+            if (mouseStopTimer) clearTimeout(mouseStopTimer);
+            mouseStopTimer = setTimeout(() => {
+                gsap.to(follower, { duration: 0.5, opacity: 0 });
+            }, 200);
+        });
     }
-
-    // Use mousedown for desktops.
-    document.addEventListener('mousedown', (e) => {
-        spawnDropBall(e.clientX, e.clientY);
-        e.preventDefault();
-    }, { passive: false });
-
-    // Touch events.
-    let touchStartX = 0, touchStartY = 0, touchStartTime = 0, touchMoved = false;
-    document.addEventListener('touchstart', (e) => {
-        if (e.touches.length) {
-            const touch = e.touches[0];
-            touchStartX = touch.clientX;
-            touchStartY = touch.clientY;
-            touchStartTime = Date.now();
-            targetX = touch.clientX;
-            targetY = touch.clientY;
-            touchMoved = false;
-        }
-    }, { passive: true });
     
-    document.addEventListener('touchmove', (e) => {
-        if (e.touches.length) {
-            const touch = e.touches[0];
-            targetX = touch.clientX;
-            targetY = touch.clientY;
-            if (Math.abs(touch.clientX - touchStartX) > 5 || Math.abs(touch.clientY - touchStartY) > 5) {
-                touchMoved = true;
+    // Complex GSAP ScrollTrigger text animations.
+    gsap.utils.toArray('.animate-text').forEach(elem => {
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: elem,
+                start: "top 85%",
+                toggleActions: "play pause resume reset",
+                onEnter: () => console.log('Starting animation for', elem),
+                onLeaveBack: () => console.log('Reversing animation for', elem)
             }
-        }
-    }, { passive: true });
-    
-    document.addEventListener('touchend', () => {
-        if (!touchMoved && (Date.now() - touchStartTime) < 300) {
-            spawnDropBall(targetX, targetY);
-        }
+        });
+        
+        tl.from(elem, {
+            opacity: 0,
+            y: 80,
+            skewY: 15,
+            scale: 0.7,
+            duration: 0.8,
+            ease: "power4.out"
+        })
+        .to(elem, {
+            duration: 0.5,
+            scale: 1.05,
+            ease: "power2.inOut"
+        })
+        .to(elem, {
+            duration: 0.5,
+            scale: 1,
+            ease: "power2.inOut"
+        });
     });
-})();
+    
+    // Smooth scrolling to sections on link click.
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
+            const targetElem = document.getElementById(targetId);
+            if (targetElem) {
+                gsap.to(window, {
+                    duration: 1,
+                    scrollTo: { y: targetElem, offsetY: 50 },
+                    ease: "power2.out"
+                });
+            }
+        });
+    });
+});
+
+
+// Replace native smooth scrolling with GSAP-powered smooth scrolling for anchor navigation,
+// ensuring it works on both desktop and mobile devices.
+// Add a loading animation for the navbar component coming in from the bottom,
+// with each element (and each character in the heading, if wrapped in spans)
+// animating in a beautiful, responsive way.
+const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+
+// Animate the navbar container sliding up from the bottom
+tl.from(".navbar", {
+    duration: 0.8,
+    y: 50,
+    opacity: 0,
+    delay: 0.2
+});
+
+// Animate each character in the navbar heading (make sure each character is wrapped in a span)
+tl.from(".navbar h2 span", {
+    duration: 0.5,
+    y: 20,
+    opacity: 0,
+    ease: "back.out(1.7)",
+    stagger: 0.05
+}, "-=0.5");
+
+// Animate each navbar list item coming from bottom
+tl.from(".navbar ul li", {
+    duration: 0.8,
+    y: 20,
+    opacity: 0,
+    ease: "back.out(1.7)",
+    stagger: 0.1
+}, "-=0.7");
+// done upper
+// Enhanced Split Text effect for the h2 inside .holder with each character wrapped and animated from below.
+const holderH2 = document.querySelector('.holder h2');
+if (holderH2) {
+    // Set a letter-spacing to ensure space between characters.
+    holderH2.style.letterSpacing = '2px';
+    // Prepare the element for animation from below.
+    gsap.set(holderH2, { opacity: 0, y: 20 });
+    
+    // Animate the whole text line, sliding up from below.
+    gsap.to(holderH2, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power2.out"
+    });
+}
+// done form thier 
+
+// Animate the form container sliding up from the bottom
+document.addEventListener('DOMContentLoaded', () => {
+    const leftBoxHeading = document.querySelector('.left-box h2');
+    if (leftBoxHeading) {
+        gsap.fromTo(
+            leftBoxHeading,
+            { y: 50, opacity: 0 },
+            { 
+                duration: 1,
+                y: 0,
+                opacity: 1,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: leftBoxHeading,
+                    start: "top 85%",
+                    end: "top 60%",
+                    toggleActions: "play pause resume reset"
+                }
+            }
+        );
+    }
+});
