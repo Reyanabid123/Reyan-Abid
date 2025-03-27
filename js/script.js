@@ -1,13 +1,32 @@
+// ============================================================================
+// GSAP & ScrollTrigger Interactive Animations and Effects
+// Author: [Your Name]
+// Description: Enhancing user experience with smooth scrolling, interactive cursor,
+// text animations and dynamic navbar animations using GSAP and ScrollTrigger.
+// Optimized for performance and SEO.
+// ============================================================================
+
+// Wrap all initialization code in a single DOMContentLoaded callback.
 document.addEventListener('DOMContentLoaded', () => {
-    // Scroll Position Save/Restore with error handling.
+
+    // ----------------------------------------------------------------------------
+    // Restore Previously Saved Scroll Position with Fallbacks
+    // ----------------------------------------------------------------------------
     try {
         const hash = window.location.hash;
-        let scrollPosition = hash ? parseInt(hash.substring(1), 10) : parseInt(localStorage.getItem('savedScroll'), 10);
-        if (!isNaN(scrollPosition)) window.scrollTo(0, scrollPosition);
+        let scrollPosition = hash 
+            ? parseInt(hash.substring(1), 10) 
+            : parseInt(localStorage.getItem('savedScroll'), 10);
+        if (!isNaN(scrollPosition)) {
+            window.scrollTo(0, scrollPosition);
+        }
     } catch (e) {
         console.error('Scroll restore error:', e);
     }
 
+    // ----------------------------------------------------------------------------
+    // Save Scroll Position on User Scroll with a Debounce
+    // ----------------------------------------------------------------------------
     let scrollTimer;
     window.addEventListener('scroll', () => {
         if (scrollTimer) clearTimeout(scrollTimer);
@@ -18,7 +37,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 150);
     });
 
-    // Register GSAP plugins.
+    // ----------------------------------------------------------------------------
+    // Register GSAP Plugins: Ensure GSAP and its Plugins are Available
+    // ----------------------------------------------------------------------------
     if (typeof gsap === 'undefined' || !gsap.registerPlugin) {
         console.error('GSAP is not available.');
         return;
@@ -27,61 +48,49 @@ document.addEventListener('DOMContentLoaded', () => {
         gsap.registerPlugin(window.ScrollTrigger, window.ScrollToPlugin);
     }
 
-    // Setup a simple GSAP-powered cursor follower for non-touch devices.
+    // ----------------------------------------------------------------------------
+    // Mouse Follower Implementation Based on Device Type
+    // ----------------------------------------------------------------------------
     if (!('ontouchstart' in window)) {
+        if (window.Shery && Shery.mouseFollower) {
+            Shery.mouseFollower({
+                skew: true,
+                ease: "cubic-bezier(0.23, 1, 0.320, 1)",
+                duration: 0.1,
+            });
+        }
+    } else {
         const follower = document.createElement('div');
-        follower.id = 'gsap-follower';
+        follower.id = 'gsap-follower-mobile';
         Object.assign(follower.style, {
             position: 'fixed',
             top: '0',
             left: '0',
-            width: '20px',
-            height: '20px',
+            width: '15px',
+            height: '15px',
             borderRadius: '50%',
-            background: 'rgba(0,0,0,0.7)',
+            background: 'rgba(0, 0, 0, 0.5)',
             pointerEvents: 'none',
             zIndex: '9999',
             transformOrigin: 'center center',
-            opacity: '1'  // visible initially
+            opacity: '1'
         });
         document.body.appendChild(follower);
-    
-        let lastX = 0, lastY = 0, lastTime = performance.now(), mouseStopTimer;
-    
-        document.addEventListener('mousemove', (e) => {
-            const now = performance.now();
-            const dt = now - lastTime || 16;
-            const dx = e.clientX - lastX;
-            const dy = e.clientY - lastY;
-            const vx = dx / dt;
-            const vy = dy / dt;
-            const factorVal = 25;
-    
-            const skewX = Math.max(Math.min(vx * factorVal, 25), -25);
-            const skewY = Math.max(Math.min(vy * factorVal, 25), -25);
-    
+
+        document.addEventListener('touchmove', (e) => {
+            const touch = e.touches[0];
             gsap.to(follower, {
                 duration: 0.3,
-                x: e.clientX - 15,
-                y: e.clientY - 15,
-                skewX: skewX,
-                skewY: skewY,
-                ease: "power2.out",
-                opacity: 1  // ensure it’s visible when moving
+                x: touch.clientX - 7.5,
+                y: touch.clientY - 7.5,
+                ease: "power2.out"
             });
-    
-            lastX = e.clientX;
-            lastY = e.clientY;
-            lastTime = now;
-    
-            if (mouseStopTimer) clearTimeout(mouseStopTimer);
-            mouseStopTimer = setTimeout(() => {
-                gsap.to(follower, { duration: 0.5, opacity: 0 });
-            }, 200);
         });
     }
-    
-    // Complex GSAP ScrollTrigger text animations.
+
+    // ----------------------------------------------------------------------------
+    // Complex ScrollTrigger-based Text Animations
+    // ----------------------------------------------------------------------------
     gsap.utils.toArray('.animate-text').forEach(elem => {
         const tl = gsap.timeline({
             scrollTrigger: {
@@ -92,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 onLeaveBack: () => console.log('Reversing animation for', elem)
             }
         });
-        
+
         tl.from(elem, {
             opacity: 0,
             y: 80,
@@ -113,7 +122,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     
-    // Smooth scrolling to sections on link click.
+    // ----------------------------------------------------------------------------
+    // Smooth Scrolling for Anchor Links via GSAP ScrollToPlugin
+    // ----------------------------------------------------------------------------
     document.querySelectorAll('a[href^="#"]').forEach(link => {
         link.addEventListener('click', (event) => {
             event.preventDefault();
@@ -128,62 +139,48 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-});
 
+    // ----------------------------------------------------------------------------
+    // Additional Global GSAP Animations and Page Elements Loading Effects
+    // ----------------------------------------------------------------------------
 
-// Replace native smooth scrolling with GSAP-powered smooth scrolling for anchor navigation,
-// ensuring it works on both desktop and mobile devices.
-// Add a loading animation for the navbar component coming in from the bottom,
-// with each element (and each character in the heading, if wrapped in spans)
-// animating in a beautiful, responsive way.
-const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
-
-// Animate the navbar container sliding up from the bottom
-tl.from(".navbar", {
-    duration: 0.8,
-    y: 50,
-    opacity: 0,
-    delay: 0.2
-});
-
-// Animate each character in the navbar heading (make sure each character is wrapped in a span)
-tl.from(".navbar h2 span", {
-    duration: 0.5,
-    y: 20,
-    opacity: 0,
-    ease: "back.out(1.7)",
-    stagger: 0.05
-}, "-=0.5");
-
-// Animate each navbar list item coming from bottom
-tl.from(".navbar ul li", {
-    duration: 0.8,
-    y: 20,
-    opacity: 0,
-    ease: "back.out(1.7)",
-    stagger: 0.1
-}, "-=0.7");
-// done upper
-// Enhanced Split Text effect for the h2 inside .holder with each character wrapped and animated from below.
-const holderH2 = document.querySelector('.holder h2');
-if (holderH2) {
-    // Set a letter-spacing to ensure space between characters.
-    holderH2.style.letterSpacing = '2px';
-    // Prepare the element for animation from below.
-    gsap.set(holderH2, { opacity: 0, y: 20 });
-    
-    // Animate the whole text line, sliding up from below.
-    gsap.to(holderH2, {
-        opacity: 1,
-        y: 0,
+    // Navbar Entrance Animation: Slide and Fade In
+    const navTL = gsap.timeline({ defaults: { ease: "power4.out" } });
+    navTL.from(".navbar", {
         duration: 0.8,
-        ease: "power2.out"
-    });
-}
-// done form thier 
+        y: 50,
+        opacity: 0,
+        delay: 0.2
+    })
+    .from(".navbar h2 span", {
+        duration: 0.5,
+        y: 20,
+        opacity: 0,
+        ease: "back.out(1.7)",
+        stagger: 0.05
+    }, "-=0.5")
+    .from(".navbar ul li", {
+        duration: 0.8,
+        y: 20,
+        opacity: 0,
+        ease: "back.out(1.7)",
+        stagger: 0.1
+    }, "-=0.7");
 
-// Animate the form container sliding up from the bottom
-document.addEventListener('DOMContentLoaded', () => {
+    // Headline Animation for .holder h2 Element
+    const holderH2 = document.querySelector('.holder h2');
+    if (holderH2) {
+        holderH2.style.letterSpacing = '2px';
+        gsap.set(holderH2, { opacity: 0, y: 20 });
+        gsap.to(holderH2, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power2.out"
+        });
+    }
+
+    // Scroll-Triggered Animation for the Form Section (Left Box)
     const leftBoxHeading = document.querySelector('.left-box h2');
     if (leftBoxHeading) {
         gsap.fromTo(
@@ -203,4 +200,22 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         );
     }
+
+    // ----------------------------------------------------------------------------
+    // Initialize Shery Effects for Big Images and Mouse Followers
+    // ----------------------------------------------------------------------------
+    window.addEventListener('load', () => {
+        if (window.Shery && Shery.imageEffect) {
+            Shery.imageEffect('.BigImage img,.SmallImages img', {
+                style: 3,
+                debug: true,
+            });
+        }
+        if (window.Shery && Shery.makeMagnet) {
+            Shery.makeMagnet(".magnet", {
+                ease: "cubic-bezier(0.23, 1, 0.320, 1)",
+                duration: 1,
+            });
+        }
+    });
 });
