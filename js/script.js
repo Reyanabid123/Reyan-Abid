@@ -151,15 +151,17 @@ document.addEventListener('DOMContentLoaded', () => {
         y: 50,
         opacity: 0,
         delay: 0.2
-    })
-    .from(".navbar h2 span", {
-        duration: 0.5,
-        y: 20,
-        opacity: 0,
-        ease: "back.out(1.7)",
-        stagger: 0.05
-    }, "-=0.5")
-    .from(".navbar ul li", {
+    });
+    if (document.querySelector('.navbar h2 span')) {
+        navTL.from(".navbar h2 span", {
+            duration: 0.5,
+            y: 20,
+            opacity: 0,
+            ease: "back.out(1.7)",
+            stagger: 0.05
+        }, "-=0.5");
+    }
+    navTL.from(".navbar ul li", {
         duration: 0.8,
         y: 20,
         opacity: 0,
@@ -211,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         function triggerShery() {
             if (window.Shery && Shery.imageEffect) {
-                Shery.imageEffect('.BigImage img,.SmallImages img', {
+                Shery.imageEffect('.BigImage img, .SmallImages img', {
                     style: 3,
                     // debug: true,
                 });
@@ -224,12 +226,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         
-        if(totalImages === 0) {
+        if (totalImages === 0) {
             triggerShery();
+            return;
         }
         
         images.forEach((img) => {
-            if (img.complete) {
+            // Ensure the image is fully loaded by checking naturalWidth
+            if (img.complete && img.naturalWidth !== 0) {
                 loadedCount++;
                 if (loadedCount === totalImages) {
                     triggerShery();
@@ -250,4 +254,211 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // ----------------------------------------------------------------------------
+    // Drawing Canvas Implementation for .testYou Div
+    // ----------------------------------------------------------------------------
+    const testYouDiv = document.querySelector('.testYou');
+    if (testYouDiv) {
+        // Create a canvas that covers the .testYou div only
+        const canvas = document.createElement('canvas');
+        canvas.width = testYouDiv.clientWidth;
+        canvas.height = testYouDiv.clientHeight;
+        Object.assign(canvas.style, {
+            width: '100%',
+            height: '100%',
+            position: 'absolute',
+            top: '0',
+            left: '0',
+            zIndex: '9999',
+            pointerEvents: 'auto'
+        });
+        testYouDiv.style.position = 'relative'; // Ensure proper positioning context
+        testYouDiv.appendChild(canvas);
+
+        const ctx = canvas.getContext('2d');
+        ctx.strokeStyle = 'rgba(0, 0, 0, 0.3)'; // Low-opacity black
+        ctx.lineWidth = 3; // Default pen size (for desktop)
+        ctx.lineCap = 'round';
+
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
+        let totalDistance = 0; // Accumulate drawn distance
+
+        // Resize the canvas when the container size changes.
+        window.addEventListener('resize', () => {
+            canvas.width = testYouDiv.clientWidth;
+            canvas.height = testYouDiv.clientHeight;
+        });
+
+        // Start drawing; cancel any pending fade-out.
+        function startDrawing(e) {
+            isDrawing = true;
+            totalDistance = 0;
+            ctx.lineWidth = e.type === 'mousedown' ? 5 : 10;
+            const rect = canvas.getBoundingClientRect();
+            lastX = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+            lastY = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
+        }
+
+        // Draw on the canvas and accumulate drawn distance.
+        function draw(e) {
+            if (!isDrawing) return;
+            const rect = canvas.getBoundingClientRect();
+            const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+            const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(x, y);
+            ctx.stroke();
+            totalDistance += Math.hypot(x - lastX, y - lastY);
+            lastX = x;
+            lastY = y;
+        }
+
+        // Stop drawing. If a significant shape was drawn, snapshot and animate it dropping with a bounce.
+        // Otherwise, fade out and clear after 1.5 sec.
+        function stopDrawing() {
+            isDrawing = false;
+            // Determine if the user drew something (threshold can be adjusted).
+            if (totalDistance > 50) {
+                // Capture the current drawing as an image
+                const dataUrl = canvas.toDataURL();
+                const img = document.createElement('img');
+                img.src = dataUrl;
+                Object.assign(img.style, {
+                    position: 'absolute',
+                    top: '0px',
+                    left: '0px',
+                    width: canvas.offsetWidth + 'px',
+                    height: canvas.offsetHeight + 'px',
+                    pointerEvents: 'none'
+                });
+                testYouDiv.appendChild(img);
+                // Clear the canvas immediately
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // Animate the image falling like a ball with a bounce effect.
+                gsap.to(img, {
+                    duration: 1,
+                    y: testYouDiv.clientHeight - canvas.getBoundingClientRect().top,
+                    ease: "bounce.out",
+                    onComplete: () => {
+                        img.remove();
+                    }
+                });
+            } else {
+                // Fade-out removal after 1.5 sec of inactivity.
+                gsap.to(canvas, {
+                    duration: 1.5,
+                    opacity: 0,
+                    delay: 1.5,
+                    onComplete: () => {
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        canvas.style.opacity = 1;
+                    }
+                });
+            }
+        }
+
+        // Desktop events
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseout', stopDrawing);
+
+        // Mobile/touch events
+        canvas.addEventListener('touchstart', startDrawing);
+        canvas.addEventListener('touchmove', draw);
+        canvas.addEventListener('touchend', stopDrawing);
+    }
+    if (testYouDiv) {
+        // Create a canvas that covers the .testYou div only
+        const canvas = document.createElement('canvas');
+        canvas.width = testYouDiv.clientWidth;
+        canvas.height = testYouDiv.clientHeight;
+        Object.assign(canvas.style, {
+            width: '100%',
+            height: '100%',
+            position: 'absolute',
+            top: '0',
+            left: '0',
+            zIndex: '9999',
+            pointerEvents: 'auto'
+        });
+        testYouDiv.style.position = 'relative'; // Ensure positioning context
+        testYouDiv.appendChild(canvas);
+
+        const ctx = canvas.getContext('2d');
+        ctx.strokeStyle = 'rgba(219, 219, 219, 0.75)'; // More opaque black stroke style
+        ctx.lineWidth = 5; // Default pen size (desktop)
+        ctx.lineCap = 'round';
+
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
+        let fadeTimeout;
+
+        // Resize canvas when .testYou div size changes (on window resize as a proxy)
+        window.addEventListener('resize', () => {
+            canvas.width = testYouDiv.clientWidth;
+            canvas.height = testYouDiv.clientHeight;
+        });
+
+        // Start drawing; cancel any pending canvas fade-out
+        function startDrawing(e) {
+            if (fadeTimeout) {
+                clearTimeout(fadeTimeout);
+                fadeTimeout = null;
+                gsap.killTweensOf(canvas);
+                canvas.style.opacity = 1;
+            }
+            isDrawing = true;
+            ctx.lineWidth = e.type === 'mousedown' ? 5 : 10;
+            const rect = canvas.getBoundingClientRect();
+            lastX = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+            lastY = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
+        }
+
+        // Draw on canvas
+        function draw(e) {
+            if (!isDrawing) return;
+            const rect = canvas.getBoundingClientRect();
+            const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+            const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(x, y);
+            ctx.stroke();
+            lastX = x;
+            lastY = y;
+        }
+
+        // Stop drawing and trigger a fade-out removal after 2.5 sec of inactivity
+        function stopDrawing() {
+            isDrawing = false;
+            fadeTimeout = setTimeout(() => {
+                gsap.to(canvas, {
+                    duration: 2.5,
+                    opacity: 0,
+                    onComplete: () => {
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        canvas.style.opacity = 1;
+                    }
+                });
+            }, 2500);
+        }
+
+        // Desktop events
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseout', stopDrawing);
+
+        // Mobile/touch events
+        canvas.addEventListener('touchstart', startDrawing);
+        canvas.addEventListener('touchmove', draw);
+        canvas.addEventListener('touchend', stopDrawing);
+    }
 });
