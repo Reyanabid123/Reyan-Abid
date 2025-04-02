@@ -8,7 +8,7 @@
 body {
     font-family: Poppins, sans-serif;
     font-size: 18px;
-    background-color: #f8f9fa;
+    background-color: #F6DC43;
     color: #000000;
     line-height: 1.6;
     padding: 20px;
@@ -19,6 +19,9 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #000000;
+padding: 10px 20px;
+border-radius: 20px;
 }
 
 .navbar h2 {
@@ -27,6 +30,7 @@ body {
     letter-spacing: -1%;
     line-height: 80%;
     font-weight: 400;
+    color: #ffffff;
 }
 
 .navbar ul {
@@ -56,8 +60,10 @@ body {
     cursor: pointer;
     font-size: 18px;
     padding: 8px 16px;
-    background: #000;
-    color: #fff;
+    background: #ffffff;
+    color: #000000;
+border-radius: 20px;
+
     border: none;
 }
 
@@ -74,9 +80,53 @@ body {
 .holder {
     text-align: left;
     display: flex;
+    height: 30%;
     flex-direction: column;
     gap: 10px;
+    background: #000000;
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 20px;
 }
+.holder2 {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    border-radius: 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Responsive adjustments for mobile devices */
+@media (max-width: 768px) {
+    .holder2 {
+        flex-direction: column;
+        height: auto;
+        gap: 20px;
+    }
+    
+    .obj1 {
+        width: 90%;
+        height: auto;
+    }
+}
+
+@media (min-width: 769px) {
+.obj1 {
+    width: 35%;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #000000;
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 20px;
+    /* border: #000 2px solid; */
+}
+}
+
 
 .hero-sec h2 {
     font-size: 24px;
@@ -93,15 +143,25 @@ body {
     font-size: 18px;
     margin: 1px 0px;
     padding: 8px 16px;
-    background: #000;
-    color: #fff;
+    background: #ffffff;
+    color: #000000;
     border: none;
-}
+border-radius: 20px;
 
+}
+.objects{
+    height: 20vh;
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* border: #000 2px solid; */
+}
 /* Desktop overrides for larger text */
 @media (min-width: 1024px) {
     .navbar h2 {
-        font-size: 42.05px;
+        font-size: 26.05px;
     }
 
     .navbar ul {
@@ -112,6 +172,8 @@ body {
     .navbar ul button {
         font-size: 26.24px;
         padding: 10px 20px;
+border-radius: 20px;
+
     }
 
     .hero-sec {
@@ -131,6 +193,8 @@ body {
     .hero-sec button {
         font-size: 24.25px;
         padding: 10px 20px;
+border-radius: 20px;
+
     }
 }
 
@@ -155,6 +219,8 @@ body {
     color: #fff;
     border: none;
     margin: 100px 0px;
+border-radius: 20px;
+
 }
 
 .container-inner {
@@ -238,6 +304,8 @@ body {
     color: #fff;
     border: none;
     letter-spacing: -3%;
+border-radius: 20px;
+
 }
 
 /* Use flex column layout for project images on all devices */
@@ -255,6 +323,8 @@ body {
     width: 100%;
     height: auto;
     overflow: hidden;
+    border-radius: 20px;
+
 }
 
 .BigImage img,
@@ -262,6 +332,8 @@ body {
     display: block;
     width: 100%;
     height: auto;
+    border-radius: 20px;
+
 }
 
 /* Arrange small images side by side if there is enough space */
@@ -273,8 +345,19 @@ body {
 
 .SmallImages img {
     margin: 10px;
+    border-radius: 20px;
+
 }
 
+.theimgarea{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* border: #000 2px solid; */
+}
 .testYou{
     height: 100vh;
     width: 100%;
@@ -305,6 +388,8 @@ body {
     padding: 10px 20px;
     background: #000;
     color: #fff;
+border-radius: 20px;
+
     border: none;
 }
 
@@ -377,6 +462,8 @@ body {
     background: #000;
     color: #fff;
     border: none;
+border-radius: 20px;
+
 }
 
 .TextSection {
@@ -456,6 +543,8 @@ body {
     padding: 10px 20px;
     background: #000;
     color: #fff;
+border-radius: 20px;
+
     border: none;
 }
 
@@ -528,6 +617,8 @@ body {
     .HowiWork button {
         font-size: 18px;
         padding: 8px 16px;
+border-radius: 20px;
+
     }
 
     .R1ow,
@@ -571,6 +662,8 @@ body {
     padding: 12px 24px;
     background: #000;
     color: #fff;
+border-radius: 20px;
+
     border: none;
     margin-bottom: 20px;
 }
@@ -625,6 +718,8 @@ body {
     background: #000;
     color: #fff;
     border: none;
+border-radius: 20px;
+
     width: 40%;
     margin-bottom: 20px;
 }
@@ -666,6 +761,8 @@ body {
     .Contact button {
         font-size: 1rem;
         padding: 8px 16px;
+border-radius: 20px;
+
     }
 
     .sociaLinks {
@@ -686,6 +783,8 @@ body {
         font-size: 1px;
         padding: 8px 16px;
         width: 100%;
+border-radius: 20px;
+
 
     }
 

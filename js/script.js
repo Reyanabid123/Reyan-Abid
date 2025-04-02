@@ -1,13 +1,27 @@
 // ============================================================================
 // GSAP & ScrollTrigger Interactive Animations and Effects
-// Author: [Your Name]
+// Author: Reyan Abid 
 // Description: Enhancing user experience with smooth scrolling, interactive cursor,
 // text animations and dynamic navbar animations using GSAP and ScrollTrigger.
 // Optimized for performance and SEO.
 // ============================================================================
 
-// Wrap all initialization code in a single DOMContentLoaded callback.
+// Navbar hide on scroll down, show on scroll up
 document.addEventListener('DOMContentLoaded', () => {
+    let lastScrollPos = window.pageYOffset;
+    window.addEventListener('scroll', () => {
+        const currentScrollPos = window.pageYOffset;
+        const navbar = document.querySelector('.navbar');
+        if (!navbar) return;
+        if (currentScrollPos > lastScrollPos) {
+            // Scrolling down – hide navbar with a smooth animation
+            gsap.to(navbar, { top: '-100px', duration: 0.5, ease: "power2.out" });
+        } else {
+            // Scrolling up – show navbar with a smooth animation
+            gsap.to(navbar, { top: '0px', duration: 0.5, ease: "power2.out" });
+        }
+        lastScrollPos = currentScrollPos <= 0 ? 0 : currentScrollPos;
+    });
 
     // ----------------------------------------------------------------------------
     // Restore Previously Saved Scroll Position with Fallbacks
@@ -462,3 +476,4 @@ document.addEventListener('DOMContentLoaded', () => {
         canvas.addEventListener('touchend', stopDrawing);
     }
 });
+
