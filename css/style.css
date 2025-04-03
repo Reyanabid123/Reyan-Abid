@@ -20,8 +20,8 @@ body {
     justify-content: space-between;
     align-items: center;
     background-color: #000000;
-padding: 10px 20px;
-border-radius: 20px;
+    padding: 10px 20px;
+    border-radius: 20px;
 }
 
 .navbar h2 {
@@ -62,7 +62,7 @@ border-radius: 20px;
     padding: 8px 16px;
     background: #ffffff;
     color: #000000;
-border-radius: 20px;
+    border-radius: 20px;
 
     border: none;
 }
@@ -88,6 +88,7 @@ border-radius: 20px;
     padding: 20px;
     border-radius: 20px;
 }
+
 .holder2 {
     width: 100%;
     height: 30%;
@@ -104,7 +105,7 @@ border-radius: 20px;
         height: auto;
         gap: 20px;
     }
-    
+
     .obj1 {
         width: 90%;
         height: auto;
@@ -112,19 +113,19 @@ border-radius: 20px;
 }
 
 @media (min-width: 769px) {
-.obj1 {
-    width: 35%;
-    height: 70%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background: #000000;
-    color: #ffffff;
-    padding: 20px;
-    border-radius: 20px;
-    /* border: #000 2px solid; */
-}
+    .obj1 {
+        width: 35%;
+        height: 70%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background: #000000;
+        color: #ffffff;
+        padding: 20px;
+        border-radius: 20px;
+        /* border: #000 2px solid; */
+    }
 }
 
 
@@ -146,10 +147,11 @@ border-radius: 20px;
     background: #ffffff;
     color: #000000;
     border: none;
-border-radius: 20px;
+    border-radius: 20px;
 
 }
-.objects{
+
+.objects {
     height: 20vh;
     width: 10%;
     display: flex;
@@ -158,6 +160,7 @@ border-radius: 20px;
     flex-direction: column;
     /* border: #000 2px solid; */
 }
+
 /* Desktop overrides for larger text */
 @media (min-width: 1024px) {
     .navbar h2 {
@@ -172,7 +175,7 @@ border-radius: 20px;
     .navbar ul button {
         font-size: 26.24px;
         padding: 10px 20px;
-border-radius: 20px;
+        border-radius: 20px;
 
     }
 
@@ -193,7 +196,7 @@ border-radius: 20px;
     .hero-sec button {
         font-size: 24.25px;
         padding: 10px 20px;
-border-radius: 20px;
+        border-radius: 20px;
 
     }
 }
@@ -208,6 +211,7 @@ border-radius: 20px;
     /* padding: 100px ; */
     /* border: #000 2px solid; */
 }
+
 /* responsive done !! */
 .webinaction button {
     line-height: 80%;
@@ -219,7 +223,7 @@ border-radius: 20px;
     color: #fff;
     border: none;
     margin: 100px 0px;
-border-radius: 20px;
+    border-radius: 20px;
 
 }
 
@@ -247,6 +251,7 @@ border-radius: 20px;
     margin-bottom: 10px;
     /* Gap after each paragraph */
 }
+
 .another-message {
     width: 100%;
     height: 50vh;
@@ -304,7 +309,7 @@ border-radius: 20px;
     color: #fff;
     border: none;
     letter-spacing: -3%;
-border-radius: 20px;
+    border-radius: 20px;
 
 }
 
@@ -349,7 +354,7 @@ border-radius: 20px;
 
 }
 
-.theimgarea{
+.theimgarea {
     height: 100vh;
     width: 100%;
     display: flex;
@@ -358,7 +363,8 @@ border-radius: 20px;
     flex-direction: column;
     /* border: #000 2px solid; */
 }
-.testYou{
+
+.testYou {
     height: 100vh;
     width: 100%;
     display: flex;
@@ -367,6 +373,7 @@ border-radius: 20px;
     flex-direction: column;
     border: #000 2px solid;
 }
+
 /* Responsive done  */
 .ReviewsSection {
     gap: 20px;
@@ -388,7 +395,7 @@ border-radius: 20px;
     padding: 10px 20px;
     background: #000;
     color: #fff;
-border-radius: 20px;
+    border-radius: 20px;
 
     border: none;
 }
@@ -462,7 +469,7 @@ border-radius: 20px;
     background: #000;
     color: #fff;
     border: none;
-border-radius: 20px;
+    border-radius: 20px;
 
 }
 
@@ -543,7 +550,7 @@ border-radius: 20px;
     padding: 10px 20px;
     background: #000;
     color: #fff;
-border-radius: 20px;
+    border-radius: 20px;
 
     border: none;
 }
@@ -617,7 +624,7 @@ border-radius: 20px;
     .HowiWork button {
         font-size: 18px;
         padding: 8px 16px;
-border-radius: 20px;
+        border-radius: 20px;
 
     }
 
@@ -662,7 +669,7 @@ border-radius: 20px;
     padding: 12px 24px;
     background: #000;
     color: #fff;
-border-radius: 20px;
+    border-radius: 20px;
 
     border: none;
     margin-bottom: 20px;
@@ -718,7 +725,7 @@ border-radius: 20px;
     background: #000;
     color: #fff;
     border: none;
-border-radius: 20px;
+    border-radius: 20px;
 
     width: 40%;
     margin-bottom: 20px;
@@ -761,7 +768,7 @@ border-radius: 20px;
     .Contact button {
         font-size: 1rem;
         padding: 8px 16px;
-border-radius: 20px;
+        border-radius: 20px;
 
     }
 
@@ -783,7 +790,7 @@ border-radius: 20px;
         font-size: 1px;
         padding: 8px 16px;
         width: 100%;
-border-radius: 20px;
+        border-radius: 20px;
 
 
     }
