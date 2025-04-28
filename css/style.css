@@ -8,7 +8,7 @@
 body {
     font-family: Poppins, sans-serif;
     font-size: 18px;
-    background-color: #F1F0E9;
+    background-color: #ffffff;
     color: #000000;
     line-height: 1.6;
     padding: 20px;
@@ -19,9 +19,10 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #000000;
+    background-color: #ffffff;
     padding: 10px 20px;
-    border-radius: 20px;
+   /* hi */
+   position: sticky;
 }
 
 .navbar h2 {
@@ -30,7 +31,7 @@ body {
     letter-spacing: -1%;
     line-height: 80%;
     font-weight: 400;
-    color: #ffffff;
+    color: #000000;
 }
 
 .navbar ul {
@@ -60,11 +61,9 @@ body {
     cursor: pointer;
     font-size: 18px;
     padding: 8px 16px;
-    background: #ffffff;
-    color: #000000;
-    border-radius: 20px;
-
-    border: none;
+    background: #000000;
+    color: #ffffff;
+border: 2px solid #000000;
 }
 
 .hero-sec {
@@ -80,20 +79,22 @@ body {
 .holder {
     text-align: left;
     display: flex;
-    height: 30%;
+    height: 50%;
+    width: 100%;
+    padding: 50px 0px;
+    font-size: 70px;
+    text-align: center;
     flex-direction: column;
     gap: 10px;
-    background: #000000;
-    color: #ffffff;
+    background: #ffffff;
+    color: #000000;
     padding: 20px;
-    border-radius: 20px;
 }
 
 .holder2 {
     width: 100%;
     height: 30%;
     display: flex;
-    border-radius: 20px;
     justify-content: space-between;
     align-items: center;
 }
@@ -123,18 +124,42 @@ body {
         background: #000000;
         color: #ffffff;
         padding: 20px;
-        border-radius: 20px;
         /* border: #000 2px solid; */
     }
+    .hero-sec h2 {
+        text-align: left;
+        display: flex;
+        height: 50%;
+        width: 100%;
+        padding: 50px 0px;
+        font-size: 50px;
+        text-align: center;
+        line-height: 111%;
+        flex-direction: column;
+        font-weight: 400;
+        gap: 10px;
+        background: #ffffff;
+        color: #000000;
+        padding: 20px;
+    }
 }
-
+/* 8977777777777777777777777777777777777777777 */
 
 .hero-sec h2 {
-    font-size: 24px;
-    /* Smaller text */
-    letter-spacing: -3%;
+    text-align: left;
+    display: flex;
+    height: 50%;
+    width: 100%;
+    padding: 50px 0px;
+    font-size: 50px;
+    text-align: center;
     line-height: 111%;
+    flex-direction: column;
     font-weight: 400;
+    gap: 10px;
+    background: #ffffff;
+    color: #000000;
+    padding: 20px;
 }
 
 .hero-sec button {
@@ -147,7 +172,6 @@ body {
     background: #ffffff;
     color: #000000;
     border: none;
-    border-radius: 20px;
 
 }
 
@@ -175,7 +199,7 @@ body {
     .navbar ul button {
         font-size: 26.24px;
         padding: 10px 20px;
-        border-radius: 20px;
+       /* hi */
 
     }
 
@@ -187,16 +211,44 @@ body {
 
     .holder {
         gap: 50px;
+        justify-content: center;
+        align-items: center;
+        flex-direction: flex;
+    }
+ .holder p{
+        font-size: 26.24px;
+        /* Bigger text */
+        letter-spacing: -3%;
+        line-height: 111%;
+        font-weight: 400;
+        width: 50%;
     }
 
+    .holder2 {
+        gap: 20px;
+    }
+
+    .obj1 {
+        width: 35%;
+        height: 70%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background: #000000;
+        color: #ffffff;
+        padding: 20px;
+       /* hi */
+ }
     .hero-sec h2 {
-        font-size: 32.53px;
+        font-size: 152.53px;
+        text-align: center;
     }
 
     .hero-sec button {
         font-size: 24.25px;
         padding: 10px 20px;
-        border-radius: 20px;
+       /* hi */
 
     }
 }
@@ -223,10 +275,45 @@ body {
     color: #fff;
     border: none;
     margin: 100px 0px;
-    border-radius: 20px;
+   /* hi */
 
 }
+.parasection {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    padding: 200px 300px;
+    font-size: 40px;
+    line-height: 110%;
+    text-align: center;
+    background: #ffffff;
+    color: #000000;
+}
 
+@media (max-width: 768px) {
+    .parasection {
+        gap: 20px;
+        font-size: 20px;
+        padding: 10px;
+        height: auto;
+        min-height: auto;
+        /* Mobile-specific: center align text */
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .parasection {
+        gap: 15px;
+        font-size: 18px;
+        padding: 8px;
+        /* Further adjustments for extra-small devices */
+    }
+}
 .container-inner {
     gap: 20px;
     height: 120vh;
@@ -292,9 +379,15 @@ body {
 .myworksection {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 60%;
     font-weight: 400;
     gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .myworksection {
+        width: 100%;
+    }
 }
 
 .myworksection button {
@@ -309,7 +402,7 @@ body {
     color: #fff;
     border: none;
     letter-spacing: -3%;
-    border-radius: 20px;
+   /* hi */
 
 }
 
@@ -328,7 +421,7 @@ body {
     width: 100%;
     height: auto;
     overflow: hidden;
-    border-radius: 20px;
+   /* hi */
 
 }
 
@@ -337,7 +430,7 @@ body {
     display: block;
     width: 100%;
     height: auto;
-    border-radius: 20px;
+   /* hi */
 
 }
 
@@ -350,7 +443,7 @@ body {
 
 .SmallImages img {
     margin: 10px;
-    border-radius: 20px;
+   /* hi */
 
 }
 
@@ -395,7 +488,7 @@ body {
     padding: 10px 20px;
     background: #000;
     color: #fff;
-    border-radius: 20px;
+   /* hi */
 
     border: none;
 }
@@ -469,7 +562,7 @@ body {
     background: #000;
     color: #fff;
     border: none;
-    border-radius: 20px;
+   /* hi */
 
 }
 
@@ -550,7 +643,7 @@ body {
     padding: 10px 20px;
     background: #000;
     color: #fff;
-    border-radius: 20px;
+   /* hi */
 
     border: none;
 }
@@ -624,7 +717,7 @@ body {
     .HowiWork button {
         font-size: 18px;
         padding: 8px 16px;
-        border-radius: 20px;
+       /* hi */
 
     }
 
@@ -669,7 +762,7 @@ body {
     padding: 12px 24px;
     background: #000;
     color: #fff;
-    border-radius: 20px;
+   /* hi */
 
     border: none;
     margin-bottom: 20px;
@@ -725,7 +818,7 @@ body {
     background: #000;
     color: #fff;
     border: none;
-    border-radius: 20px;
+   /* hi */
 
     width: 40%;
     margin-bottom: 20px;
@@ -768,7 +861,7 @@ body {
     .Contact button {
         font-size: 1rem;
         padding: 8px 16px;
-        border-radius: 20px;
+       /* hi */
 
     }
 
@@ -790,7 +883,7 @@ body {
         font-size: 1px;
         padding: 8px 16px;
         width: 100%;
-        border-radius: 20px;
+       /* hi */
 
 
     }

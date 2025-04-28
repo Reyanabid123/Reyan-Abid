@@ -228,54 +228,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ----------------------------------------------------------------------------
   // Initialize Shery Effects for Big Images and Mouse Followers
   // ----------------------------------------------------------------------------
-  window.addEventListener("load", () => {
-    const images = document.querySelectorAll(".BigImage img, .SmallImages img");
-    let loadedCount = 0;
-    const totalImages = images.length;
-
-    function triggerShery() {
-      if (window.Shery && Shery.imageEffect) {
-        Shery.imageEffect(".BigImage img, .SmallImages img", {
-          style: 3,
-          // debug: true,
-        });
-      }
-      if (window.Shery && Shery.makeMagnet) {
-        Shery.makeMagnet(".magnet", {
-          ease: "cubic-bezier(0.23, 1, 0.320, 1)",
-          duration: 1,
-        });
-      }
-    }
-
-    if (totalImages === 0) {
-      triggerShery();
-      return;
-    }
-
-    images.forEach((img) => {
-      // Ensure the image is fully loaded by checking naturalWidth
-      if (img.complete && img.naturalWidth !== 0) {
-        loadedCount++;
-        if (loadedCount === totalImages) {
-          triggerShery();
-        }
-      } else {
-        img.addEventListener("load", () => {
-          loadedCount++;
-          if (loadedCount === totalImages) {
-            triggerShery();
-          }
-        });
-        img.addEventListener("error", () => {
-          loadedCount++;
-          if (loadedCount === totalImages) {
-            triggerShery();
-          }
-        });
-      }
-    });
-  });
+ 
 
   // ----------------------------------------------------------------------------
   // Drawing Canvas Implementation for .testYou Div
